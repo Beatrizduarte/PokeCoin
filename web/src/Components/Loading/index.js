@@ -6,7 +6,7 @@ export const Loading = () => {
         <img 
             src={PokeballLoading}
             alt="Carregando"
-            style={{width: "100%"}}
+            style={{width: "50%"}}
         />
     );
 }

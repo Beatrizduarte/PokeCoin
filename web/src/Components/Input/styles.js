@@ -3,6 +3,7 @@ import { theme } from '../../utils/theme';
 
 export const Container = styled.div`
     margin-bottom: 30px;
+    position: relative;
 
     & label{
         display: block;
@@ -19,13 +20,13 @@ export const Container = styled.div`
         border: 1px solid #ddd;
         outline: none;
         font-size: ${theme.size[100]};
-        padding: 0 15px;
+        padding: 0 50px 0 15px; 
         font-family: ${theme.font.Roboto};
     }
 
     & svg{
         position: absolute;
-        right: 40px;
+        right: 15px;
         margin: 5px 0 0 0;
     }
 `;

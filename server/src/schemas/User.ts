@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-
+import mongoose from 'mongoose';
+import { Schema, model, } from 'mongoose';
 import { IUser } from '../interfaces';
 
 const UserSchema = new Schema({
@@ -9,7 +9,22 @@ const UserSchema = new Schema({
         first: { type: String, required: true},
         last: { type: String, required: true},
         social: { type: String, required: false}
-    }
+    },
+    wallet: {
+        type: [
+            {
+                pokemonID: {type: Number, required: true },
+                name: { type: String, required: true },
+                image: { type: String, required: true },
+                types: { type: String, required: true },
+                quotas: {type: Number, required: true},
+                value: {type: String, required: true},
+                deleteAt: {type: Date}
+            },
+        ], 
+        default: null,
+    },
 }, { timestamps: true })
+
 
 export default model<IUser>('User', UserSchema);

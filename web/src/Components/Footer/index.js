@@ -4,7 +4,9 @@ import { Wrapper } from "./styles";
 const Footer = () => {
     return(
         <Wrapper>
-            <p>Desenvolvido <span><AiFillHeart /></span>
+            <p>Desenvolvido</p>
+            <span><AiFillHeart /></span>
+            <p>
                 por <a href="https://github.com/Beatrizduarte" target='_blank' rel="noreferrer">Beatriz Duarte</a>
             </p>
         </Wrapper>

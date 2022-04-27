@@ -24,12 +24,14 @@ import {
 } from './styles';
 import { Api } from '../../Services/api';
 
-const PokeCard = ({ element }) =>{
+const WalletPokemonDetails = ({ element, bitcoin }) => {
     const navigate = useNavigate();
     const [changeValue, setChangeValue] = useState(1)
     const { state } = useLocation();
+    const [valuePerQuotas, setValuePerQuotas] = useState()
     let BTC = element  * state.base_experience
     let buyValue = BTC * changeValue;
+
 
     const handleSum = () =>{
         if(changeValue >= 1){
@@ -38,14 +40,14 @@ const PokeCard = ({ element }) =>{
     }
 
     const handleSub = async() =>{
-        if(changeValue > 1){
+        if(changeValue >= 0){
             setChangeValue(changeValue - 1)
         }
     }
 
     const handleData = async() =>{
         const data = {
-            types: "buy",
+            types: "sell",
             pokemon: {
                 name: state.name,
                 image: state.image,
@@ -60,7 +62,7 @@ const PokeCard = ({ element }) =>{
             }
         }
 
-        let confirmedBuy;
+        let confirmedSell;
 
         await Swal.fire({
             title: 'Você deseja confirmar a compra?',
@@ -71,14 +73,14 @@ const PokeCard = ({ element }) =>{
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
               Swal.fire('Compra realizada', '', 'success')
-              return confirmedBuy = true;
+              return confirmedSell = true;
             } else if (result.isDenied) {
               Swal.fire('A oporação foi cancelada', '', 'info')
-              return confirmedBuy = false;
+              return confirmedSell = false;
             }
           })
 
-          if(confirmedBuy){
+          if(confirmedSell){
               try{
                   const { data: result } = await Api.Transaction.create(data);
 
@@ -109,25 +111,29 @@ const PokeCard = ({ element }) =>{
     return(
         <Wrapper>
             <Box>
-                <BoxImg types={state.types[0].type.name}>
-                    <Image 
+                <BoxImg types={state.types}>
+                    {/* <Image 
                     src={state.image}
                     alt={state.name}
-                    />
+                    /> */}
                 </BoxImg>
                 <BoxInfo>
                     <Title>{state.name}</Title>
                     <BoxPrice>
-                        <BaseXp>XP: {state.base_experience}</BaseXp>
-                        <Price>BTC {BTC}</Price>
+                        <BaseXp>Contas: {state.quotas}</BaseXp>
+                        <Price>Preço por cota {BTC}</Price>
+                    </BoxPrice>
+                    <BoxPrice>
+
                     </BoxPrice>
                     <BoxButton>
                         <BoxCount>
-                            <Button onClick={handleSub} disabled={changeValue === 1} isDisabled={changeValue === 1}>
+                            <Text>]{`Deseja vender quantos ${state.name}?`}</Text>
+                            <Button onClick={handleSub} disabled={changeValue === 0} isDisabled={changeValue === 0}>
                                 <FaMinus size={25} />
                             </Button>
                             <Display>{changeValue}</Display>
-                            <Button onClick={handleSum}>
+                            <Button onClick={handleSum} disabled={changeValue === state.quotas} isDisabled={changeValue === state.quotas}>
                                 <FaPlus size={25} />
                             </Button>
                         </BoxCount>
@@ -135,7 +141,7 @@ const PokeCard = ({ element }) =>{
                             <Text>{`${changeValue} ${state.name} equivalem a BTC ${buyValue}`}</Text>
                         </BoxText>
                         <BoxBuy>
-                            <Buy onClick={() => handleData()}>Comprar</Buy>
+                            <Buy onClick={() => handleData()}>Vender</Buy>
                         </BoxBuy>
                     </BoxButton>
                 </BoxInfo>
@@ -144,4 +150,4 @@ const PokeCard = ({ element }) =>{
     );
 }
 
-export default PokeCard;
+export default WalletPokemonDetails;

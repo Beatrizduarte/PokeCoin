@@ -49,7 +49,7 @@ const PokemonDetails = () =>{
             {loading && <LoadingSmall />}
             {!loading && (
                 <>
-                    <PokeCard element={btcValue}/>
+                    <PokeCard element={btcValue} />
                 </>
             )}
         </Wrapper>

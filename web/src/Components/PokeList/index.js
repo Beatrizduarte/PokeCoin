@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Pagination from '../Pagination';
 import {
     Wrapper,
+    PaginationContainer,
     Container,
     Box,
     Title,
@@ -9,8 +12,14 @@ import {
     Image
  } from './styles';
 
-const PokeList = ({ elements }) => {
-    const navigate = useNavigate()
+const PokeList = ({ 
+    elements,
+    pokemonPerPage,
+    currentPage,
+    setCurrentPage,
+    totalPokemon
+}) => {
+    const navigate = useNavigate();
 
     return(
         <Wrapper>
@@ -33,6 +42,15 @@ const PokeList = ({ elements }) => {
                     ))}
                 </Container>
             )}
+
+            <PaginationContainer>
+                <Pagination 
+                    currentPage={currentPage}
+                    totalPokemon={totalPokemon}
+                    pokemonPerPage={pokemonPerPage}
+                    onPageChange={page => setCurrentPage(page)}
+                />
+            </PaginationContainer>
         </Wrapper>
     )
 }

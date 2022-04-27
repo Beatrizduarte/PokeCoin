@@ -8,7 +8,7 @@ class PokemonController {
         const { pokemonPerPage, currentPage} = request.query;
 
         try{
-            const { data } = await pokemonApi.get(`pokemon?limit=${pokemonPerPage}&offset=${currentPage}`);
+            const { data } = await pokemonApi.get(`pokemon?limit=${pokemonPerPage}&offset=${Number(currentPage) * Number(pokemonPerPage)}`);
 
             Promise.all(data.results.map(async (pokemon: any) => {
                 return await pokemonApi.get(`${pokemon.url}`).then(({ data: { id, name, sprites: { other }, base_experience ,types } }) => {

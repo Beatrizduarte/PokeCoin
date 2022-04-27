@@ -1,17 +1,36 @@
 import { Request, Response } from 'express'
-import _ from 'lodash'
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 import User from '../schemas/User'
 import Crypto from '../utils/crypto';
 
 class UserController {
     async list (request: Request, response: Response){
-    const users = await User.find()
 
-    return response.json(users)
-  }
+      const token = request.headers.authorization?.replace('Bearer ', '');
 
-  public async create (request: Request, response: Response){
+      if(token){
+        const userDecode = jwtDecode<JwtPayload>(token);
+        const userID = userDecode._id;
+
+        const { name, wallet } = await User.findById({_id: userID});
+
+        const data = { 
+          name,
+          wallet,
+        }
+
+        return response.status(200).json(data);
+
+      }else{
+        response.status(401).json({
+          error: 'Invalid token'
+        })
+      }
+
+    }
+
+   async create (request: Request, response: Response){
 
     try{
       const user = await User.findOne({ $or: [{ 'email': request.body.email }]})
@@ -36,6 +55,7 @@ class UserController {
       })
     }
   }
+
 }
 
 export default new UserController()

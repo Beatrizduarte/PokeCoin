@@ -2,20 +2,21 @@ import { useState,useEffect } from 'react'
 import Swal from 'sweetalert2';
 import PokeList from '../../Components/PokeList';
 import { Api } from '../../Services/api';
-import { LoadingSmall } from '../../Components/Loading';
+import { LoadingSmall, Loading } from '../../Components/Loading';
 import { Wrapper } from './styles'
 
 const Home = () =>{
-    const [Loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const [totalPokemon] = useState(1126);
     const [pokemonPerPage, setPokemonPerPage] = useState(20);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [pokemonList, setPokemonList] = useState({});
 
     useEffect(() =>{
         const loadPokemonList = async() =>{
             setLoading(true)
             try{
-                const { data } = await Api.Pokemon.list(pokemonPerPage,currentPage)
+                const { data } = await Api.Pokemon.list(pokemonPerPage, currentPage - 1)
 
                 setPokemonList(data);
                 setLoading(false)
@@ -46,13 +47,20 @@ const Home = () =>{
     },[pokemonPerPage, currentPage])
 
     return(
-        <Wrapper load={Loading}>
-        {Loading && <LoadingSmall />}
-        {!Loading && (
+        <Wrapper load={loading}>
+        {loading ? <LoadingSmall />
+            :
             <>
-                <PokeList elements={pokemonList}/>
+                <PokeList 
+                    elements={pokemonList} 
+                    pokemonPerPage={pokemonPerPage}
+                    setPokemonPerPage={setPokemonPerPage}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    totalPokemon={totalPokemon}
+                />  
             </>
-        )}
+        }
         </Wrapper>
     );
 }

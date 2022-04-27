@@ -3,7 +3,10 @@ import { theme } from '../../utils/theme';
 
 export const Wrapper = styled.div`
     background: black;
-    padding: 10px;
+    padding: 25px 10px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     & p{
         color: white;
@@ -17,6 +20,11 @@ export const Wrapper = styled.div`
     }
 
     & span{
-        margin: 5px 15px 0 5px;
+        margin: 7px 10px 0 10px;
+        color: white;
+    }
+
+    @media (min-width: 600){
+        padding: 10px;
     }
 `;

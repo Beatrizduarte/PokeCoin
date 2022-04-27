@@ -8,4 +8,15 @@ export interface IUser extends Document{
         last: string,
         social: string,
     },
+    wallet: [
+        {
+            pokemonID: number,
+            quotas: number,
+            value: string,
+            deleteAt: Date,
+            name: string,
+            image: string,
+            types: string,
+        }
+    ],
 }

@@ -1,10 +1,11 @@
 import { useState  } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Link } from 'react-router-dom';
 import { Wrapper, Box, BoxText, BoxInput, Text,BoxButton, Button } from './styles';
 import Input from '../../Components/Input'
 import { Api } from '../../Services/api'
+import { ROUTES } from '../../Constants'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -36,11 +37,12 @@ const Login = () => {
 
                 const { data: result } = await Api.Auth.login(data)
 
-                localStorage.setItem('Token', result.accessToken);
-                localStorage.setItem('Name', JSON.stringify(result.name));
-                
+                sessionStorage.setItem('Token', result.accessToken);
+                sessionStorage.setItem('Name', JSON.stringify(result.name));
 
-                navigate('/home');
+                navigate(ROUTES.HOME);
+                // return <Navigate to={ROUTES.HOME} />
+                
             }catch(error){
                 if(error.response.status === 400){
                     const Toast = Swal.mixin({

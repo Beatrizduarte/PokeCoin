@@ -1,17 +1,14 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { theme } from '../../utils/theme'
 import { Types } from '../../utils/pokemonTypes';
 
 export const Wrapper = styled.div`
-    background: ${theme.color.primary};
-
-`;
-
-export const PaginationContainer = styled.div`
-    padding-bottom: 30px;
-    display: flex;
-    justify-content: center;
+    > h3{
+        text-align: center;
+        font-size: ${theme.size[400]};
+        color: ${theme.size[500]};
+        font-family: ${theme.font.Roboto};
+    }
 `;
 
 export const Container = styled.div`
@@ -33,7 +30,7 @@ export const Box = styled.div`
     box-shadow: 1px 1px 5px ${theme.gray[300]};
     border-radius: 5px;
     text-decoration: none;
-    cursor: pointer;
+    // cursor: pointer;
 
     &:hover{
         background: ${(props) => 
@@ -57,12 +54,16 @@ export const ID = styled.span`
         Types[props.types].primary
     };
     display: inline-block;
-    width: 80px;
+    width: 45px;
     padding: 2px;
-    // position: absolute;
     border-radius: 5px 0 5px 0;
     color: #FFF;
     font-weight: bold;
+`;
+
+export const Info = styled.p`
+    text-align: center;
+    padding: 11px;
 `;
 
 export const Text = styled.p`

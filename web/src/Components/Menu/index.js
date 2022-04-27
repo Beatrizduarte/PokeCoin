@@ -1,15 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Container } from "./styles";
+import { ROUTES } from "../../Constants";
 
 const Menu = ({ open }) => {
     const navigate = useNavigate();
 
     const handleExit = () =>{
 
-        localStorage.removeItem("Name");
-        localStorage.removeItem("Token");
+        sessionStorage.removeItem("Name");
+        sessionStorage.removeItem("Token");
         
-        navigate('/')
+        navigate(ROUTES.LOGIN);
     }
 
 

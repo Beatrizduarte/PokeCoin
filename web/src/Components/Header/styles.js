@@ -13,6 +13,9 @@ export const Box = styled.div`
 `;
 
 export const BoxGoBack = styled.div`
+    cursor: pointer;
+    padding: 0 0 15px 0;
+
     > svg{
         margin-top: 15px;
     }

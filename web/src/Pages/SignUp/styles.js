@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { theme } from '../../utils/theme';
 
 export const Wrapper = styled.div`
-    height: 100vh;
     display: flex;
 
     @media (min-width: 600px){
@@ -10,7 +9,13 @@ export const Wrapper = styled.div`
     }
 `;
 
-export const Box = styled.div``
+export const Box = styled.div`   
+
+    @media (min-width: 600px){
+        margin: 30px 0 70px 0;
+
+    }
+`
 
 export const BoxImage = styled.div`
     display: flex;
@@ -35,6 +40,7 @@ export const Col = styled.div`
     &:last-child{
         display: flex;
         justify-content: center;
+        margin-bottom: 30px;
     }
 `
 
