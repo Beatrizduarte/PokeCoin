@@ -1,5 +1,5 @@
 
-<img src="./frontend/src/assets/mochup.png" width="840px">
+<img src="./web/src/assets/mochup.png" width="840px">
 
 <br>
 
