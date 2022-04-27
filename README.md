@@ -1,4 +1,6 @@
 
+<h1 align="center">PokeCoin</h1>
+
 <img src="./web/src/assets/mochup.png" width="840px">
 
 <br>
