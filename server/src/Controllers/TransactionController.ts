@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 
-import Transaction from '../schemas/transaction';
+import Transaction from '../schemas/Transaction';
 import User from '../schemas/User';
 
 class TransactionController {
