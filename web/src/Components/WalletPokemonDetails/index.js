@@ -24,14 +24,12 @@ import {
 } from './styles';
 import { Api } from '../../Services/api';
 
-const WalletPokemonDetails = ({ element, bitcoin }) => {
+const WalletPokemonDetails = ({ bitcoin }) => {
     const navigate = useNavigate();
-    const [changeValue, setChangeValue] = useState(1)
     const { state } = useLocation();
-    const [valuePerQuotas, setValuePerQuotas] = useState()
-    let BTC = element  * state.base_experience
-    let buyValue = BTC * changeValue;
-
+    const [changeValue, setChangeValue] = useState(state.quotas)
+    let BTC = bitcoin  * state.baseXP
+    let sellValue = BTC * changeValue;
 
     const handleSum = () =>{
         if(changeValue >= 1){
@@ -40,7 +38,7 @@ const WalletPokemonDetails = ({ element, bitcoin }) => {
     }
 
     const handleSub = async() =>{
-        if(changeValue >= 0){
+        if(changeValue >= 1){
             setChangeValue(changeValue - 1)
         }
     }
@@ -51,28 +49,27 @@ const WalletPokemonDetails = ({ element, bitcoin }) => {
             pokemon: {
                 name: state.name,
                 image: state.image,
-                pokemonId: state.id,
-                types: state.types[0].type.name
+                pokemonID: state.pokemonID,
+                types: state.types
             },
             info: {
-                baseXp: state.base_experience,
+                baseXp: state.baseXP,
                 BTCDay: BTC,
                 quotas: changeValue,
-                value: buyValue
+                value: sellValue
             }
         }
 
         let confirmedSell;
 
         await Swal.fire({
-            title: 'Você deseja confirmar a compra?',
+            title: 'Você deseja confirmar a venda?',
             showDenyButton: true,
             confirmButtonText: 'Confirmar',
             denyButtonText: `Cancelar`,
           }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-              Swal.fire('Compra realizada', '', 'success')
+              Swal.fire('Venda realizada', '', 'success')
               return confirmedSell = true;
             } else if (result.isDenied) {
               Swal.fire('A oporação foi cancelada', '', 'info')
@@ -87,6 +84,7 @@ const WalletPokemonDetails = ({ element, bitcoin }) => {
                   if(result){
                     navigate('/wallet');
                   }
+
               }catch(error){
                 const Toast = Swal.mixin({
                     toast: true,
@@ -112,24 +110,23 @@ const WalletPokemonDetails = ({ element, bitcoin }) => {
         <Wrapper>
             <Box>
                 <BoxImg types={state.types}>
-                    {/* <Image 
+                    <Image 
                     src={state.image}
                     alt={state.name}
-                    /> */}
+                    />
                 </BoxImg>
                 <BoxInfo>
                     <Title>{state.name}</Title>
                     <BoxPrice>
-                        <BaseXp>Contas: {state.quotas}</BaseXp>
-                        <Price>Preço por cota {BTC}</Price>
-                    </BoxPrice>
-                    <BoxPrice>
-
+                        <BaseXp>Quantidade de contas:</BaseXp>
+                        <BaseXp>{state.quotas}</BaseXp>
+                        <Price>Preço de venda por cota:</Price>
+                        <Price>{BTC}</Price>
                     </BoxPrice>
                     <BoxButton>
+                        <Text>{`Deseja vender quantos ${state.name}?`}</Text>
                         <BoxCount>
-                            <Text>]{`Deseja vender quantos ${state.name}?`}</Text>
-                            <Button onClick={handleSub} disabled={changeValue === 0} isDisabled={changeValue === 0}>
+                            <Button onClick={handleSub} disabled={changeValue === 1} isDisabled={changeValue === 1}>
                                 <FaMinus size={25} />
                             </Button>
                             <Display>{changeValue}</Display>
@@ -138,7 +135,7 @@ const WalletPokemonDetails = ({ element, bitcoin }) => {
                             </Button>
                         </BoxCount>
                         <BoxText>
-                            <Text>{`${changeValue} ${state.name} equivalem a BTC ${buyValue}`}</Text>
+                            <Text>{`${changeValue} ${state.name} equivalem a BTC ${sellValue}`}</Text>
                         </BoxText>
                         <BoxBuy>
                             <Buy onClick={() => handleData()}>Vender</Buy>

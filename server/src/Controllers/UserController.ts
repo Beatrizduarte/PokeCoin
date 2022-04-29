@@ -6,26 +6,30 @@ import Crypto from '../utils/crypto';
 
 class UserController {
     async list (request: Request, response: Response){
+      try {
 
-      const token = request.headers.authorization?.replace('Bearer ', '');
-
-      if(token){
-        const userDecode = jwtDecode<JwtPayload>(token);
-        const userID = userDecode._id;
-
-        const { name, wallet } = await User.findById({_id: userID});
-
-        const data = { 
-          name,
-          wallet,
+        const token = request.headers.authorization?.replace('Bearer ', '');
+  
+        if(token){
+          const userDecode = jwtDecode<JwtPayload>(token);
+          const userID = userDecode._id;
+  
+          const { name, wallet } = await User.findById({_id: userID});
+  
+          const data = { 
+            name,
+            wallet,
+          }
+  
+          return response.status(200).json(data);
+  
+        }else{
+          response.status(401).json({
+            error: 'Invalid token'
+          })
         }
-
-        return response.status(200).json(data);
-
-      }else{
-        response.status(401).json({
-          error: 'Invalid token'
-        })
+      } catch (error) {
+        response.status(500).json({ error: error.message })
       }
 
     }

@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
-import { LoadingSmall } from '../../Components/Loading';
-import PokeCard from "../../Components/PokeCard";
-import { Api } from '../../Services/api'
-import { Wrapper } from './styles';
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { LoadingSmall } from "../../Components/Loading";
+import WalletPokemonDetails from "../../Components/WalletPokemonDetails";
+import { Api } from '../../Services/api';
+import { Wrapper } from "./styles";
 
-const PokemonDetails = () =>{
-    const [btcValue, setBtcValue] = useState('');
+const PokemonSell = () => {
+    const [sellValue, setSellValue] = useState('');
     const [loading, setLoading] = useState(true);
 
     useEffect(() =>{
@@ -15,9 +15,9 @@ const PokemonDetails = () =>{
             try{
                 const { data } = await Api.Bitcoin.get();
 
-                const buyValue = Number(data.ticker.buy) / 100000000;
+                const sellValue = Number(data.ticker.sell) / 100000000;
 
-                setBtcValue(buyValue);
+                setSellValue(sellValue);
                 setLoading(false);
             }catch(error){
                 const Toast = Swal.mixin({
@@ -44,16 +44,17 @@ const PokemonDetails = () =>{
         loadBitcoinValue();
     },[])
 
+
     return(
         <Wrapper load={loading}>
-            {loading ? <LoadingSmall />
+            {loading ? <LoadingSmall /> 
             :
                 <>
-                    <PokeCard element={btcValue} />
-                </>
+                    <WalletPokemonDetails bitcoin={sellValue}/>
+                </>    
             }
         </Wrapper>
     );
 }
 
-export default PokemonDetails;
+export default PokemonSell;

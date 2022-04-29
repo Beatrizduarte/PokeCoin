@@ -8,12 +8,11 @@ import { Wrapper,Container, Box, BoxTime, BoxInfo, Text } from "./styles";
 const Statement = () => {
     const [loading, setLoading] = useState(true);
     const [transaction, setTransaction] = useState([]);
-    const token = sessionStorage.getItem('Token');
     
     useEffect(() =>{
         const loadTransaction = async() =>{
             try{
-                const { data } = await Api.Transaction.list(token);
+                const { data } = await Api.Transaction.list();
 
                 const formatDate = data.map((element) => {
                     element.createdAt = moment(element.createdAt).format("DD/MM/YYYY hh:mm:ss");
@@ -56,7 +55,7 @@ const Statement = () => {
                     {transaction.length >= 1 && (
                         <Container>
                             {transaction.map((element) =>(
-                                <Box key={element._id}>
+                                <Box key={element._id} types={element.types}>
                                     <BoxTime>
                                         <Text>{element.createdAt}</Text>
                                     </BoxTime>

@@ -49,11 +49,11 @@ const PokeCard = ({ element }) =>{
             pokemon: {
                 name: state.name,
                 image: state.image,
-                pokemonId: state.id,
-                types: state.types[0].type.name
+                pokemonID: state.id,
+                types: state.types[0].type.name,
+                baseXP: state.base_experience,
             },
             info: {
-                baseXp: state.base_experience,
                 BTCDay: BTC,
                 quotas: changeValue,
                 value: buyValue
@@ -68,7 +68,6 @@ const PokeCard = ({ element }) =>{
             confirmButtonText: 'Confirmar',
             denyButtonText: `Cancelar`,
           }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
               Swal.fire('Compra realizada', '', 'success')
               return confirmedBuy = true;

@@ -4,7 +4,7 @@ import { ROUTES } from '../Constants';
 
 
 const PrivateRoute = ({ children }) => {
-    const token = sessionStorage.getItem('Token');
+    const token = sessionStorage.getItem('token');
 
     return token ? children : <Navigate to={ROUTES.LOGIN} />
 }

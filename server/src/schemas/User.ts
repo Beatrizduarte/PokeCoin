@@ -13,13 +13,13 @@ const UserSchema = new Schema({
     wallet: {
         type: [
             {
-                pokemonID: {type: Number, required: true },
-                name: { type: String, required: true },
-                image: { type: String, required: true },
-                types: { type: String, required: true },
-                quotas: {type: Number, required: true},
-                value: {type: String, required: true},
-                deleteAt: {type: Date}
+                pokemonID: {type: Number, require: true },
+                quotas: { type: Number, require: true},
+                value: { type: String, required: true },
+                baseXP: { type: Number, required: true },
+                name: { type: String, required: true},
+                image: { type: String, required: true},
+                types: { type: String, required: true},
             },
         ], 
         default: null,

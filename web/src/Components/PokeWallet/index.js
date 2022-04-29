@@ -11,7 +11,6 @@ import {
     ID,
     Image
 } from "./styles";
-import { Api } from "../../Services/api";
 
 const PokeWallet = ({elements}) => {
     const navigate = useNavigate();
@@ -19,11 +18,10 @@ const PokeWallet = ({elements}) => {
     return(
         <Wrapper>
             <h3>Pokemon Comprados</h3>
-            {elements.wallet.length >= 1 && (
                 <Container>
                     {elements.wallet.map((element) => (
-                         <Box key={element.id} types={element.types}>
-                         {/* <Box key={element.id} types={element.types} onClick={() => navigate(`/pokemonSell/${element.id}`, { state: element })}> */}
+                        //  <Box key={element.id} types={element.types}>
+                         <Box key={element.id} types={element.types} onClick={() => navigate(`/pokemonSell/${element.id}`, { state: element })}>
                          <ID types={element.types}>{`#${element.pokemonID}`}</ID>
                          <Title>{element.name}</Title>
                          <Image 
@@ -31,12 +29,12 @@ const PokeWallet = ({elements}) => {
                          />
                          {/* <Info>Esse pokemon valorizou</Info> */}
                          <Info>{`Quantidade: ${element.quotas}`}</Info>
-                         <Info>{`Valor BTC ${element.value}`}</Info>
+                         <Info>{`Valor em BTC:`}</Info>
+                         <Info>{`${element.value}`}</Info>
                          <Text types={element.types}>{element.types}</Text>
                      </Box>
                     ))}
                 </Container>
-            )}
         </Wrapper>
     );   
 }

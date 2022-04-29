@@ -5,7 +5,7 @@ import { Types } from '../../utils/pokemonTypes';
 export const Wrapper = styled.div`
     > h3{
         text-align: center;
-        font-size: ${theme.size[400]};
+        font-size: ${theme.size[500]};
         color: ${theme.size[500]};
         font-family: ${theme.font.Roboto};
     }
@@ -15,11 +15,11 @@ export const Container = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
     justify-items: center;
     padding: 30px 0;
 
-    @media (min-width: 800px){
+    @media (min-width: 1000px){
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 `;
@@ -30,7 +30,7 @@ export const Box = styled.div`
     box-shadow: 1px 1px 5px ${theme.gray[300]};
     border-radius: 5px;
     text-decoration: none;
-    // cursor: pointer;
+    cursor: pointer;
 
     &:hover{
         background: ${(props) => 

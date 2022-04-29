@@ -13,7 +13,7 @@ export interface IUser extends Document{
             pokemonID: number,
             quotas: number,
             value: string,
-            deleteAt: Date,
+            baseXP: number,
             name: string,
             image: string,
             types: string,

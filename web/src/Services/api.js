@@ -1,21 +1,7 @@
-import axios from "axios";
+import api from './config'
 
-const api = axios.create({
-    baseURL:process.env.REACT_APP_SERVER,
-})
-
-  let token;
-
-    api.interceptors.request.use(request => {
-        token = sessionStorage.getItem('Token');
-      if(token !== null) {
-        api.defaults.headers.common['Authorization'] = `Bearer ${token}`; 
-      }
-  
-      return request
-    }, error => {
-      return Promise.reject(error.response)
-    })
+const token = `Bearer ${sessionStorage.getItem('token')}`
+const headers = { Authorization: token }
 
 export const Api = {
     Pokemon: {
@@ -26,13 +12,13 @@ export const Api = {
     },
     User: {
         create: (params) => api.post('/users', params),
-        list: () => api.get('/users'),
+        list: () => api.get('/users', { headers }),
     },
     Auth: {
         login: (params) => api.post('/auth', params),
     },
     Transaction: {
-      create: (params) => api.post('/transaction', params),
-      list: () => api.get('/transaction', {header: { Authorization: token}}),
+      create: (params) => api.post('/transaction', params, { headers }),
+      list: () => api.get('/transaction', { headers }),
     },
 }

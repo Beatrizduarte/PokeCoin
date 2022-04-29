@@ -21,6 +21,8 @@ export const Box = styled.div`
 
 export const BoxImg = styled.div`
     background: ${props => Types[props.types].primary};
+    display: flex;
+    align-items: center;
 `;
 
 export const Image = styled.img`
@@ -50,7 +52,7 @@ export const Title = styled.h3`
 
 export const BoxPrice = styled.div`
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
 `;
 
 export const BaseXp = styled.span`

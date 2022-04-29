@@ -37,11 +37,10 @@ const Login = () => {
 
                 const { data: result } = await Api.Auth.login(data)
 
-                sessionStorage.setItem('Token', result.accessToken);
-                sessionStorage.setItem('Name', JSON.stringify(result.name));
+                sessionStorage.setItem('token', result.accessToken);
+                sessionStorage.setItem('name', JSON.stringify(result.name));
 
                 navigate(ROUTES.HOME);
-                // return <Navigate to={ROUTES.HOME} />
                 
             }catch(error){
                 if(error.response.status === 400){

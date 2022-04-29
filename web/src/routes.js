@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, } from 'react-router-dom';
+import { ROUTES } from './Constants';
+import PrivateRoute from './Routes/PrivateRoute';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Login from './Pages/Login';
@@ -8,13 +9,10 @@ import Wallet from './Pages/Wallet';
 import NotFoundPage from './Pages/NotFoundPage';
 import PokemonDetails from './Pages/PokemonDetails';
 import SignUp from './Pages/SignUp';
-import WalletPokemonDetails from './Components/WalletPokemonDetails';
-import { ROUTES } from './Constants';
-import PrivateRoute from './Routes/PrivateRoute';
+import PokemonSell from './Pages/PokemonSell';
+import Extract from './Pages/Extract';
 
 const Router = () => {
-    // const isAuth = sessionStorage.getItem('Token')
-
     return(
         <>
             <BrowserRouter>
@@ -43,7 +41,13 @@ const Router = () => {
                     <Route path={ROUTES.POKEMONSELL} element={
                         <PrivateRoute>
                             <Header />
-                            <WalletPokemonDetails />
+                            <PokemonSell />
+                        </PrivateRoute>
+                    }/>
+                    <Route path={ROUTES.EXTRACT} element={
+                        <PrivateRoute>
+                            <Header />
+                            <Extract />
                         </PrivateRoute>
                     }/>
                 </Routes>

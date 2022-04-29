@@ -7,8 +7,8 @@ const Menu = ({ open }) => {
 
     const handleExit = () =>{
 
-        sessionStorage.removeItem("Name");
-        sessionStorage.removeItem("Token");
+        sessionStorage.removeItem("name");
+        sessionStorage.removeItem("token");
         
         navigate(ROUTES.LOGIN);
     }
@@ -17,7 +17,8 @@ const Menu = ({ open }) => {
     return(
         <Container open={open}>
             <Link to={'/home'}>Home</Link>
-            <Link to={'/Wallet'}>Carteira</Link>
+            <Link to={'/wallet'}>Carteira</Link>
+            <Link to={'/extract'}>Extrato</Link>
             <span onClick={() => handleExit()}>Sair</span>
         </Container>
     );

@@ -14,18 +14,25 @@ export const Wrapper = styled.div`
     }
 
     > h3{
-        font-size: ${theme.size[400]};
-        padding-left: 15px;
+        font-size: ${theme.size[500]};
         font-family: ${theme.font.Roboto};
+        text-align: center;
     }
 `;
 
-export const Container = styled.div``;
+export const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    border: 1px solid #404040;
+    box-shadow: 1px 1px 2px #404040;
+`;
 
 export const Box = styled.div`
     border-top: 2px solid #CECECE;
     background-color: #dbecf0;
     padding: 20px;
+    text-align: ${props => props.types === 'buy' ? 'left' : 'right'}
 `;
 
 export const BoxTime = styled.div`

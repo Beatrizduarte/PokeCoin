@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Statement from "../../Components/Statement";
 import PokeWallet from "../../Components/PokeWallet";
 import { Wrapper, Text } from "./styles";
 import { Api } from "../../Services/api";
 import { LoadingSmall } from "../../Components/Loading";
 
 const Wallet = () => {
+
     const [userData, setUserData] = useState({});
     const [loading, setLoading] = useState(true);
     const [bitcoin, setBitcoin] = useState({});
@@ -18,27 +18,28 @@ const Wallet = () => {
             setLoading(true)
             try{
                 const { data } = await Api.User.list()
+
                 setUserData(data);
-                setLoading(false)
             }catch(error){
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-right',
                     iconColor: 'white',
                     customClass: {
-                      popup: 'colored-toast'
+                        popup: 'colored-toast'
                     },
                     showConfirmButton: false,
                     timer: 3500,
                     timerProgressBar: true
-                  })
+                    })
             
-                  await Toast.fire({
+                    await Toast.fire({
                     icon: 'error',
                     title: 'Houve um problema ao carregar a carteira, tente novamente mais tarde'
-                  })
+                    })
                 setError(true);
-                setLoading(false);
+            } finally {
+                setLoading(false)
             }
         }
 
@@ -48,32 +49,31 @@ const Wallet = () => {
                 const { data } = await Api.Bitcoin.get();
                 
                 setBitcoin(data);
-                setLoading(false)
             }catch(error){
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-right',
                     iconColor: 'white',
                     customClass: {
-                      popup: 'colored-toast'
+                        popup: 'colored-toast'
                     },
                     showConfirmButton: false,
                     timer: 3500,
                     timerProgressBar: true
-                  })
+                    })
             
-                  await Toast.fire({
+                    await Toast.fire({
                     icon: 'error',
                     title: 'Houve um problema ao carregar a carteira, tente novamente mais tarde'
-                  })
+                    })
 
+            } finally {
                 setLoading(false);
             }
         }
 
         loadData();
         loadBTC();
-
     },[])
 
     return(
@@ -83,11 +83,10 @@ const Wallet = () => {
             <>{!error ? 
                 <>
                     <PokeWallet elements={userData} bitcoin={bitcoin} />
-                    <Statement />
                 </>
-            :  
+                :  
                 <Text>Não existe dados para ser exibidos.</Text>
-            }    
+                }    
             </>
             }
         </Wrapper>

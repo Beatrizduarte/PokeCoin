@@ -13,6 +13,6 @@ app.use(routes);
 
 mongoose.connect(DATABASE_URL)
 
-console.log(`Listen on http://localhost:` + process.env.port)
+console.log(`Listen on http://localhost:` + process.env.PORT)
 
-app.listen(process.env.port);
+app.listen(process.env.port || 3334);

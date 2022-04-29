@@ -22,7 +22,7 @@ export const Container = styled.div`
     justify-items: center;
     padding: 30px 0;
 
-    @media (min-width: 800px){
+    @media (min-width: 1000px){
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 `;
