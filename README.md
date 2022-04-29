@@ -27,11 +27,13 @@ Esse projeto foi desenvolvido utilizando as API'S [Pokemon](https://pokeapi.co/d
 - Express
 - Typescript
 - Axios
+- Mobile First
 
 ## Pré-requisitos
 
 - node
 - yarn
+- MongoDB
 
 ## :rocket: Rodando o projeto
 
