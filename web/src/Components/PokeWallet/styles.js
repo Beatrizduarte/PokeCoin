@@ -3,6 +3,11 @@ import { theme } from '../../utils/theme'
 import { Types } from '../../utils/pokemonTypes';
 
 export const Wrapper = styled.div`
+    min-height: Calc(100vh - 166px);
+    display: ${props => props.load ? 'flex' : 'block'};
+    justify-content: center;
+    align-items: center;
+
     > h3{
         text-align: center;
         font-size: ${theme.size[500]};
