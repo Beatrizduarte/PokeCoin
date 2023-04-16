@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { theme } from '../../utils/theme';
-import LoginBackground from '../../assets/LoginBackground.jpg'
 
 export const Wrapper = styled.div`
     background: rgb(241,96,91);
